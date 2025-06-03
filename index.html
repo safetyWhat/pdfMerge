@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PDF Merger</title>
+</head>
+<body>
+  <h1>Merge PDFs</h1>
+
+  <input type="file" id="pdfUpload" multiple accept="application/pdf" />
+  <ul id="fileList"></ul>
+  <button id="mergeBtn">Merge PDFs</button>
+  <a id="downloadLink" style="display:none;" download="merged.pdf">Download Merged PDF</a>
+
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
