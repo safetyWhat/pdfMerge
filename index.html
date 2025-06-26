@@ -3,14 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <title>PDF Merger</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .upload-section {
+      margin-bottom: 20px;
+      padding: 20px;
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .file-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+    
+    .file-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin: 5px 0;
+      background: #f5f5f5;
+      border-radius: 4px;
+      cursor: move;
+      transition: background-color 0.2s;
+    }
+    
+    .file-item:hover {
+      background: #e0e0e0;
+    }
+    
+    .file-item.dragging {
+      opacity: 0.5;
+    }
+    
+    .drag-handle {
+      margin-right: 10px;
+      color: #666;
+      font-weight: bold;
+      cursor: grab;
+    }
+    
+    .file-name {
+      flex: 1;
+      margin-right: 10px;
+    }
+    
+    .remove-btn {
+      background: #ff4444;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+    
+    .remove-btn:hover {
+      background: #cc0000;
+    }
+    
+    .duplicate-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+    
+    .duplicate-btn:hover {
+      background: #1e7e34;
+    }
+    
+    .action-buttons {
+      margin: 20px 0;
+    }
+    
+    .btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+    
+    .btn:hover {
+      background: #0056b3;
+    }
+    
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .download-link {
+      display: none;
+      background: #28a745;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      margin-left: 10px;
+    }
+    
+    .download-link:hover {
+      background: #1e7e34;
+    }
+  </style>
 </head>
 <body>
-  <h1>Merge PDFs</h1>
+  <h1>PDF Merger</h1>
 
-  <input type="file" id="pdfUpload" multiple accept="application/pdf" />
-  <ul id="fileList"></ul>
-  <button id="mergeBtn">Merge PDFs</button>
-  <a id="downloadLink" style="display:none;" download="merged.pdf">Download Merged PDF</a>
+  <div class="upload-section">
+    <p>Select PDF files to merge</p>
+    <input type="file" id="pdfUpload" multiple accept="application/pdf" />
+  </div>
+  
+  <div id="fileListContainer" style="display: none;">
+    <h3>Files to merge (drag to reorder):</h3>
+    <ul id="fileList" class="file-list"></ul>
+  </div>
+  
+  <div class="action-buttons">
+    <button id="addMoreBtn" class="btn" style="display: none;">Add More Files</button>
+    <button id="clearAllBtn" class="btn" style="display: none;">Clear All</button>
+    <button id="mergeBtn" class="btn" disabled>Merge PDFs</button>
+    <a id="downloadLink" class="download-link" download="merged.pdf">Download Merged PDF</a>
+  </div>
 
   <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
   <script src="app.js"></script>
